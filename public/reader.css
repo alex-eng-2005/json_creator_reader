@@ -20,5 +20,43 @@ body
 {
   background: linear-gradient(#c2a0ff,#ACF4F8);
   border: 1px solid black;
-  height: 150px;
+  height: 25vh;
+}
+
+.inputContainer
+{
+    text-align: center;
+    border: 1px solid black;
+    height: 74vh;
+}
+
+#api-input
+{
+    width: 50%;
+    height: 5vh;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+}
+
+#json-input
+{
+    width: 50%;
+    height: 40%;
+    font-family: "Rubik", sans-serif;
+    resize: none;
+}
+
+#enter-btn, #enter2-btn
+{
+    height: 6vh;
+    width: 20%;
+    background-color: rgb(239, 239, 239);
+    cursor: pointer;
+    border-radius: 20px;
+    font-family: "Rubik", sans-serif;
+}
+
+#enter-btn:hover, #enter2-btn:hover
+{
+    background-color: rgb(189, 189, 189);
 }
