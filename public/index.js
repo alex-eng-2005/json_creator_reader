@@ -10,5 +10,5 @@ read.addEventListener("click", ()=>{
 
 //Goes to the create html
 create.addEventListener("click", ()=>{
-    window.location.href ="reader.html"
+    window.location.href ="creator.html"
 })

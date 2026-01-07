@@ -1,0 +1,24 @@
+body
+{
+    margin: 0px auto
+}
+#title
+{
+  font-size: 20px;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight:  400px;
+  font-style: normal;
+  text-align: center; 
+  text-decoration: underline;
+  text-shadow: 0px 0px 1px black;
+  padding: 10px;
+  font-size: 40px;
+}
+
+.titleContainer
+{
+  background: linear-gradient(#c2a0ff,#ACF4F8);
+  border: 1px solid black;
+  height: 150px;
+}
