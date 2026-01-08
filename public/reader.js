@@ -37,16 +37,52 @@ function decodeJSON(text)
     if(text[0] == "{" && text[text.length - 1] == "}")
     {
         //Keys, values
-        let keys_values = [];
+        let keys = []
+        //Values
+        let values = [];
+        //Key
+        let key = "";
+        //Value
+        let value = "";
+        //INdex
+        let index = 0;
         //Splits the array into different sections
         arr = text.slice(1, text.length - 1);
         arr = arr.split(",");
         //Loops through the array
-        
+        for(let kv of arr)
+        {
+            //Finds the valid names
+            try
+            {
+                let valid = JSON.parse(`{${kv}}`)
+                keys.push(Object.keys(valid)[0])
+                values.push(Object.values(valid))
+                //keys.push(valid.key());
+                //values.push(valid.value());
+                //console.log("HO")
+                console.log(keys);
+                console.log(values)
+            }
+            catch(e)
+            {
+                index = kv.length - 1;
+                value = "";
+                key = "";
+                
+                if(kv[kv.length - 1] == "\"")
+                {
+                    while(index >= 0)
+                    {
+                        index -= 1
+                    }
+                }
+            }
+        }
 
-        return arr;
+        return [keys, values];
     }
-    //This is not a json
+    //This is not a json and cannot be fixed
     else
     {
         return false;
