@@ -51,6 +51,7 @@ function decodeJSON(text)
         //Splits the array into different sections
         arr = text.slice(1, text.length - 1);
         arr = arr.split(",");
+        console.log(arr);
         //Loops through the array
         for(let kv of arr)
         {
@@ -69,7 +70,6 @@ function decodeJSON(text)
                 key = "";
                 success = false;
 
-                
                 if(kv[kv.length - 1] == "\"")
                 {
                     //First count all of the parenthesis
@@ -122,8 +122,7 @@ function decodeJSON(text)
                         {
                             value = new Array(value);
                         }
-                        
-                        
+                         
                     }
                 }
                 //Gets the keys and values
@@ -149,7 +148,8 @@ document.getElementById("enter-btn").addEventListener("click",async ()=>{
     let get_data = await get_json(get_url);
     //Reads the data
     let keys_values = clean_json(get_data);
-    console.log(keys_values);
+    //console.log(keys_values);
+    document.getElementById("error-msg").style.visibility = "hidden"
 })
 
 document.getElementById("enter2-btn").addEventListener("click", ()=>{
@@ -159,12 +159,21 @@ document.getElementById("enter2-btn").addEventListener("click", ()=>{
         let read_data = JSON.parse(document.getElementById("json-input").value);
         //Reads the data
         let keys_values = clean_json(read_data);
-        console.log(keys_values)
+        //console.log(keys_values)
+        document.getElementById("error-msg").style.visibility = "hidden"
     }
     //Fixes up the json to what it thinks the user wants
     catch(err)
     {
-        console.log("Edited JSON");
-        console.log(decodeJSON(document.getElementById("json-input").value))
+        let result = decodeJSON(document.getElementById("json-input").value)
+        if(!result)
+        {
+            document.getElementById("error-msg").style.visibility = "visible"
+            
+        }
+        else
+        {
+              document.getElementById("error-msg").style.visibility = "hidden"
+        }
     }
 })

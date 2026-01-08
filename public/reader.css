@@ -30,7 +30,7 @@ body
     height: 74vh;
 }
 
-#api-input
+#api-input, #error-msg
 {
     width: 50%;
     height: 5vh;
@@ -38,6 +38,11 @@ body
     font-optical-sizing: auto;
 }
 
+#error-msg{
+    margin-left: auto;
+    margin-right: auto;
+    visibility:hidden;
+}
 #json-input
 {
     width: 50%;
@@ -60,3 +65,4 @@ body
 {
     background-color: rgb(189, 189, 189);
 }
+
