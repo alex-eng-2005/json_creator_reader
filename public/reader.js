@@ -42,10 +42,7 @@ function decodeJSON(text)
         arr = text.slice(1, text.length - 1);
         arr = arr.split(",");
         //Loops through the array
-        for(let i = 0; i < arr.length; i++)
-        {
-            
-        }
+        
 
         return arr;
     }
