@@ -27,7 +27,7 @@ export function clean_json(data)
     return [keys, values]
 }
 
-//Decodes JSON
+//Decodes JSON to the best of it's ability
 function decodeJSON(text)
 {
     let arr = []
@@ -46,6 +46,8 @@ function decodeJSON(text)
         let value = "";
         //INdex
         let index = 0;
+        //Count all of the success
+        let success = true;
         //Splits the array into different sections
         arr = text.slice(1, text.length - 1);
         arr = arr.split(",");
@@ -57,29 +59,79 @@ function decodeJSON(text)
             {
                 let valid = JSON.parse(`{${kv}}`)
                 keys.push(Object.keys(valid)[0])
-                values.push(Object.values(valid))
-                //keys.push(valid.key());
-                //values.push(valid.value());
-                //console.log("HO")
-                console.log(keys);
-                console.log(values)
+                values.push(Object.values(valid)[0])
             }
+            //Catches the ones that are improper
             catch(e)
             {
                 index = kv.length - 1;
                 value = "";
                 key = "";
+                success = false;
+
                 
                 if(kv[kv.length - 1] == "\"")
                 {
+                    //First count all of the parenthesis
                     while(index >= 0)
                     {
+                        if(kv[index] == ":")
+                        {
+                            //Checks for the bracket and if there is nothing in front
+                            if(value.indexOf("\"") != value.length - 1 
+                            && Number(value.slice(0, value.indexOf("\""))) == 0)
+                            {
+                                key = kv.slice(0, index);
+                                value = value.slice(value.indexOf("\"") + 1, value.length - 1);
+                                success = true;
+                                index = 0;
+                            }
+                        }
+                        else
+                        {
+                            value = kv[index] + value;
+                        }
                         index -= 1
                     }
+                    //If we cannot extract a key and value, we return false
+                    if(!success)
+                    {
+                        return false;
+                    }
                 }
+                else
+                {
+                    //Checks if cannot determine the key and value
+                    if(kv.indexOf(":") == -1)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        key = kv.slice(0, kv.indexOf(":"))
+                        value = kv.slice(kv.indexOf(":") + 1);
+                        if(!isNaN(Boolean(value)))
+                        {
+                            value = Number(value);
+                        }
+                        else if(!isNaN(Number(value)))
+                        {
+                            value = Number(value);
+                        }
+                        else if(Array.isArray(value))
+                        {
+                            value = new Array(value);
+                        }
+                        
+                        
+                    }
+                }
+                //Gets the keys and values
+                keys.push(key.trim());
+                values.push(value);
             }
         }
-
+        //Returns all of the keys and values
         return [keys, values];
     }
     //This is not a json and cannot be fixed
