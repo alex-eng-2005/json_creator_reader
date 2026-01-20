@@ -15,16 +15,7 @@ export async function get_json(url)
 //Reads the json
 export function clean_json(data)
 {
-    //Arr
-    let keys = []
-    //Values
-    let values = [];
-    for(let [key, value] of Object.entries(data))
-    {
-        keys.push(key)
-        values.push(value)
-    }
-    return [keys, values]
+    return JSON.stringify(data)
 }
 
 //Decodes JSON to the best of it's ability
@@ -130,8 +121,14 @@ function decodeJSON(text)
                 values.push(value);
             }
         }
+        //Turns it into an json
+        let obj = {}
+        for(let i = 0; i < keys.length; i++)
+        {
+            obj[keys[i]] = values[i]
+        }
         //Returns all of the keys and values
-        return [keys, values];
+        return JSON.stringify(obj);
     }
     //This is not a json and cannot be fixed
     else
@@ -148,8 +145,14 @@ document.getElementById("enter-btn").addEventListener("click",async ()=>{
     let get_data = await get_json(get_url);
     //Reads the data
     let keys_values = clean_json(get_data);
+    
+    //Goes to the 
     //console.log(keys_values);
     document.getElementById("error-msg").style.visibility = "hidden"
+    //Stores the sessionStorage into the keys and values
+    sessionStorage.setItem("key_values", keys_values);
+    //Outputs our results output
+    window.location.href="output.html"
 })
 
 document.getElementById("enter2-btn").addEventListener("click", ()=>{
@@ -161,6 +164,10 @@ document.getElementById("enter2-btn").addEventListener("click", ()=>{
         let keys_values = clean_json(read_data);
         //console.log(keys_values)
         document.getElementById("error-msg").style.visibility = "hidden"
+        //Stores the key_values into the session storage
+        sessionStorage.setItem("key_values", keys_values);
+        //Outputs our results into the output
+        window.location.href="output.html"
     }
     //Fixes up the json to what it thinks the user wants
     catch(err)
