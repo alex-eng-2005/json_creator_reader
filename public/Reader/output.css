@@ -1,0 +1,25 @@
+td, th{
+    width: 300px;
+    text-align: center;
+    font-family: "Rubik", sans-serif;
+    border: 3px solid black;
+}
+
+#title
+{
+  font-size: 20px;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight:  400px;
+  font-style: normal;
+  text-align: center; 
+  text-decoration: underline;
+  text-shadow: 0px 0px 1px black;
+  padding: 10px;
+  font-size: 40px;
+}
+
+table
+{
+    border: 3px solid black;
+}
